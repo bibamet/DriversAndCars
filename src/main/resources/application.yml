@@ -20,5 +20,5 @@ spring:
 #    hibernate:
 #      ddl-auto: update
     show-sql: true
-#server:
-#  port: 42100
+server:
+  port: 42100
