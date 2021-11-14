@@ -21,11 +21,13 @@ public class AdviceProcessor {
 
     private final LogService logService;
 
-    @Pointcut("execution(public * com.example.driversandcars.controller.DriversAndCarsController.getDriverByCarId(..)) && args(numberOfCar, httpServletRequest, ..)")
-    public void pointcut(String numberOfCar, HttpServletRequest httpServletRequest){};
+    private final HttpServletRequest httpServletRequest;
 
-//    @Around(value = "pointcut(numberOfCar, httpServletRequest)")
-    public void aroundProcess(ProceedingJoinPoint pjp, String numberOfCar, HttpServletRequest httpServletRequest) throws Throwable {
+    @Pointcut("execution(public * com.example.driversandcars.controller.DriversAndCarsController.getDriverByCarId(..)) && args(numberOfCar, ..)")
+    public void pointcut(String numberOfCar){};
+
+    @Around(value = "pointcut(numberOfCar)")
+    public Object aroundProcess(ProceedingJoinPoint pjp, String numberOfCar) throws Throwable {
 
         Signature sign = pjp.getSignature();
         LocalDateTime timestamp = LocalDateTime.now();
@@ -34,7 +36,7 @@ public class AdviceProcessor {
 
         Long startTime = System.currentTimeMillis();
 
-        log.info("before executing {}. Requesting from remote host {} driver's info with carnumber {}",
+        log.debug("before executing {}. Requesting from remote host {} driver's info with carnumber {}",
                 method,
                 httpServletRequest.getRemoteHost(),
                 numberOfCar);
@@ -52,7 +54,9 @@ public class AdviceProcessor {
                         .clientHost(clientHost)
                 .build());
 
-        log.info("after executing {}.{}. Returned value {}", sign.getDeclaringType(), sign.getName(), result);
+        log.debug("after executing {}.{}. Returned value {}", sign.getDeclaringType(), sign.getName(), result);
+
+        return result;
 
     }
 

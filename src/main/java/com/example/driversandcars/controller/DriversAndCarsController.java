@@ -16,12 +16,11 @@ public class DriversAndCarsController {
 
     private final DriversAndCarsService driversAndCarsService;
 
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("/driverid/{numberOfCar}")
-    public ResponseEntity<DriverDto> getDriverByCarId(@PathVariable String numberOfCar, HttpServletRequest httpServletRequest) {
+    public DriverDto getDriverByCarId(@PathVariable String numberOfCar) {
 
-        DriverDto driverDTO = driversAndCarsService.getDriverByCarId(numberOfCar, httpServletRequest);
-
-        return new ResponseEntity<>(driverDTO, HttpStatus.OK);
+        return driversAndCarsService.getDriverByCarId(numberOfCar);
 
 //        return carEntity.map(entity -> new ResponseEntity<>(entity.getOwner(), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(new DriverEntity(), HttpStatus.NOT_FOUND));
 

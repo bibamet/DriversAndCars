@@ -27,8 +27,8 @@ public class DriversAndCarsService {
     private final DriverMapper driverMapper;
     private final CarMapper carMapper;
 
-    @Transactional
-    public DriverDto getDriverByCarId(String numberOfCar, HttpServletRequest httpServletRequest) {
+//    @Transactional
+    public DriverDto getDriverByCarId(String numberOfCar) {
 
         Optional<CarEntity> carEntity = carEntityRepo.findByNumberOfCar(numberOfCar);
 
