@@ -12,6 +12,7 @@ spring:
     url: "jdbc:postgres://ec2-54-73-152-36.eu-west-1.compute.amazonaws.com:5432/dammgsp0eo7u28"
     username: ykepdmjhbclstv
     password: 1ac1d6c57600993ce6b4921c70e7b35ca53cb5c3029a560dc5c175eacf9f4250
+    driver-class-name: org.postgresql.Driver
   liquibase:
     user: ykepdmjhbclstv
     password: 1ac1d6c57600993ce6b4921c70e7b35ca53cb5c3029a560dc5c175eacf9f4250
