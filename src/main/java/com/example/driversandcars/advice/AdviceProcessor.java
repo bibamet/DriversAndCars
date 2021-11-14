@@ -24,7 +24,7 @@ public class AdviceProcessor {
     @Pointcut("execution(public * com.example.driversandcars.service.DriversAndCarsService.getDriverByCarId(..)) && args(numberOfCar, httpServletRequest, ..)")
     public void pointcut(String numberOfCar, HttpServletRequest httpServletRequest){};
 
-    @Around(value = "pointcut(numberOfCar, httpServletRequest)")
+//    @Around(value = "pointcut(numberOfCar, httpServletRequest)")
     public void aroundProcess(ProceedingJoinPoint pjp, String numberOfCar, HttpServletRequest httpServletRequest) throws Throwable {
 
         Signature sign = pjp.getSignature();
