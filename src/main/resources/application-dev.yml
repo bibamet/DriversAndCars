@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/postgres?currentSchema=driversandcarsliqui"
+    username: driversandcarsuser
+    password: 123
+  liquibase:
+    user: driversandcarsuser
+    password: 123
+    change-log: 'classpath:db-migrations/changelog.xml'
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+server:
+  port: 42100
