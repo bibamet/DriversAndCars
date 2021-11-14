@@ -17,8 +17,8 @@ spring:
     password: 1ac1d6c57600993ce6b4921c70e7b35ca53cb5c3029a560dc5c175eacf9f4250
     change-log: 'classpath:db-migrations/changelog.xml'
   jpa:
-#    hibernate:
-#      ddl-auto: update
+    hibernate:
+      ddl-auto: create
     show-sql: true
 #server:
 #  port: 42100
