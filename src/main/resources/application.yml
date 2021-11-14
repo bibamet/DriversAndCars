@@ -8,7 +8,7 @@ spring:
     user: ykepdmjhbclstv
     password: 1ac1d6c57600993ce6b4921c70e7b35ca53cb5c3029a560dc5c175eacf9f4250
     change-log: 'classpath:db-migrations/changelog.xml'
-#    driver-class-name: org.postgresql.Driver
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: create

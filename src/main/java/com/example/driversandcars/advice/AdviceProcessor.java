@@ -21,7 +21,7 @@ public class AdviceProcessor {
 
     private final LogService logService;
 
-    @Pointcut("execution(public * com.example.driversandcars.service.DriversAndCarsService.getDriverByCarId(..)) && args(numberOfCar, httpServletRequest, ..)")
+    @Pointcut("execution(public * com.example.driversandcars.controller.DriversAndCarsController.getDriverByCarId(..)) && args(numberOfCar, httpServletRequest, ..)")
     public void pointcut(String numberOfCar, HttpServletRequest httpServletRequest){};
 
 //    @Around(value = "pointcut(numberOfCar, httpServletRequest)")
