@@ -1,16 +1,24 @@
+#spring:
+#  datasource:
+#    url: "jdbc:postgresql://localhost:5432/postgres?currentSchema=driversandcarsliqui"
+#    username: driversandcarsuser
+#    password: 123
+#  liquibase:
+#    user: driversandcarsuser
+#    password: 123
+#    change-log: 'classpath:db-migrations/changelog.xml'
 spring:
   datasource:
-    url: "jdbc:postgresql://localhost:5432/postgres?currentSchema=driversandcarsliqui"
-    username: driversandcarsuser
-    password: 123
+    url: "jdbc:postgres://ykepdmjhbclstv:1ac1d6c57600993ce6b4921c70e7b35ca53cb5c3029a560dc5c175eacf9f4250@ec2-54-73-152-36.eu-west-1.compute.amazonaws.com:5432/dammgsp0eo7u28"
+    username: ykepdmjhbclstv
+    password: 1ac1d6c57600993ce6b4921c70e7b35ca53cb5c3029a560dc5c175eacf9f4250
   liquibase:
-    user: driversandcarsuser
-    password: 123
+    user: ykepdmjhbclstv
+    password: 1ac1d6c57600993ce6b4921c70e7b35ca53cb5c3029a560dc5c175eacf9f4250
     change-log: 'classpath:db-migrations/changelog.xml'
-
   jpa:
 #    hibernate:
 #      ddl-auto: update
     show-sql: true
-server:
-  port: 42100
+#server:
+#  port: 42100
