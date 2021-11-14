@@ -1,1 +1,1 @@
-web: java -jar build/libs/DriversAndCars-0.0.1-SNAPSHOT-plain.jar
+web: java -Dgrails.env=$ENV -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/*.jar
