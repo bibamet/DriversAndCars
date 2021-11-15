@@ -95,7 +95,7 @@ public class AdviceProcessor {
                     .executionTime(endTime - startTime)
                     .result("false")
                     .exception(exception.getMessage())
-                    .clientHost(clientHost)
+                    .clientHost(httpServletRequest.getRemoteAddr())
                     .build());
 
             log.debug("after executing {}. Exception: {}", method, exception);
@@ -111,7 +111,7 @@ public class AdviceProcessor {
                     .executionTime(endTime - startTime)
                     .result("false")
                     .exception(exception.getRootCause().getMessage())
-                    .clientHost(clientHost)
+                    .clientHost(httpServletRequest.getRemoteAddr())
                     .build());
 
             log.debug("after executing {}. Exception: {}", method, exception);
