@@ -2,12 +2,14 @@ package com.example.driversandcars.controller;
 
 import com.example.driversandcars.dto.DriverDto;
 import com.example.driversandcars.service.DriversAndCarsService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/driversandcars")
@@ -26,10 +28,11 @@ public class DriversAndCarsController {
 
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping("/add")
-    public void addDriversAndCars(@RequestBody DriverDto driverDTO, HttpServletRequest httpServletRequest) {
+    public Boolean addDriversAndCars(@Valid @RequestBody DriverDto driverDTO) {
 
-        driversAndCarsService.addDriversAndCars(driverDTO, httpServletRequest);
+        return driversAndCarsService.addDriversAndCars(driverDTO);
 
     }
 

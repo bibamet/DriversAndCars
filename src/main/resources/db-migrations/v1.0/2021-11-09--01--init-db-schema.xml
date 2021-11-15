@@ -37,7 +37,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="number_of_car" type="varchar(15)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="owner_id" type="uuid">
                 <constraints foreignKeyName="fk_driver_id" nullable="false" references="drivers(id)"/>

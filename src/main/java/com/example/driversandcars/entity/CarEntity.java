@@ -24,6 +24,7 @@ public class CarEntity {
     private UUID Id;
 
     private String model;
+    @Column(unique = true)
     private String numberOfCar;
 
     @ManyToOne(fetch = FetchType.EAGER)

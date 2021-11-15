@@ -27,7 +27,6 @@ public class DriversAndCarsService {
     private final DriverMapper driverMapper;
     private final CarMapper carMapper;
 
-//    @Transactional
     public DriverDto getDriverByCarId(String numberOfCar) {
 
         Optional<CarEntity> carEntity = carEntityRepo.findByNumberOfCar(numberOfCar);
@@ -46,7 +45,7 @@ public class DriversAndCarsService {
                 .build();
     }
 
-    public void addDriversAndCars(DriverDto driverDTO, HttpServletRequest httpServletRequest) {
+    public Boolean addDriversAndCars(DriverDto driverDTO) {
 
         Example<DriverEntity> example = Example.of(driverMapper.toDriverEntity(driverDTO));
 
@@ -72,6 +71,8 @@ public class DriversAndCarsService {
         }
 
         driverEntityRepo.save(driverEntity);
+
+        return true;
 
     }
 

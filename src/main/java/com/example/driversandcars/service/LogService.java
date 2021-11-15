@@ -14,7 +14,6 @@ public class LogService {
 
     private final LogEntityRepo logEntityRepo;
 
-//    @Transactional
     public LogEntity saveLog(LogEntity log) {
 
         return logEntityRepo.save(log);

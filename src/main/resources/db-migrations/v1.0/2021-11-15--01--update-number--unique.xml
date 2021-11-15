@@ -5,12 +5,12 @@
         xsi:schemaLocation = "http://www.liquibase.org/xml/ns/dbchangelog
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
-    <changeSet id="2021-11-09--02--update-db-schema.xml" author="Pavel Kalinchuk">
-    <addColumn tableName="drivers">
-        <column name="car_id" type="uuid">
-            <constraints nullable="false" foreignKeyName="fk_car_id" references="cars(id)"/>
+    <changeSet id="2021-11-15--01--update-number--unique.xml" author="Pavel Kalinchuk">
+    <update tableName="cars">
+        <column name="number_of_car">
+            <constraints unique="true"/>
         </column>
-    </addColumn>
+    </update>
     </changeSet>
 
 </databaseChangeLog>

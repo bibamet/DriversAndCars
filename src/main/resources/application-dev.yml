@@ -8,8 +8,8 @@ spring:
     password: 123
     change-log: 'classpath:db-migrations/changelog.xml'
   jpa:
-    hibernate:
-      ddl-auto: update
+#    hibernate:
+#      ddl-auto: update
     show-sql: true
 server:
   port: 42100
