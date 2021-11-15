@@ -13,3 +13,6 @@ spring:
     show-sql: true
 server:
   port: 42100
+internal:
+  api:
+    predicate-uuid: ${PREDICATE_UUID:"public.uuid_generate_v4()"}
