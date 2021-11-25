@@ -9,6 +9,7 @@
 
     <include file="v1.0/2021-11-09--01--init-db-schema.xml" relativeToChangelogFile="true"/>
     <include file="v1.0/2021-11-13--01--create-log-table-schema.xml" relativeToChangelogFile="true"/>
+    <include file="v1.0/2021-11-16--01--unique-constraint-drivers.xml" relativeToChangelogFile="true"/>
 <!--    <include file="v1.0/2021-11-15&#45;&#45;01&#45;&#45;update-number&#45;&#45;unique.xml" relativeToChangelogFile="true"/>-->
 
 </databaseChangeLog>

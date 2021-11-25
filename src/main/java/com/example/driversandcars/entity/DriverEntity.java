@@ -28,8 +28,10 @@ public class DriverEntity {
 
     private String category;
 
+    @Column(unique = true)
     private Long serial_license;
 
+    @Column(unique = true)
     private Long number_license;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)//, mappedBy = "owner")

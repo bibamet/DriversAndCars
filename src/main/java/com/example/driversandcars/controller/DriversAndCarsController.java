@@ -36,4 +36,8 @@ public class DriversAndCarsController {
 
     }
 
+    public void testMethod() {
+        System.out.println("Привет");
+    }
+
 }
