@@ -1,7 +1,7 @@
 spring:
   datasource:
     url: "jdbc:postgresql://localhost:5432/postgres?currentSchema=driversandcarsliqui"
-    username: driversandcarsuser
+    username: driversandcarsuserusage
     password: 123
   liquibase:
     user: driversandcarsuser
