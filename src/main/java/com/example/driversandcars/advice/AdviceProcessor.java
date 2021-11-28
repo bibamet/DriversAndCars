@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 @Component
 @Slf4j
 @RequiredArgsConstructor
+//todo RENAME to logical name
 public class AdviceProcessor {
 
     private final LogService logService;
@@ -29,6 +30,7 @@ public class AdviceProcessor {
 
     @Pointcut("execution(public * com.example.driversandcars.controller.DriversAndCarsController.getDriverByCarId(..)) && args(numberOfCar, ..)")
     public void pointcut(String numberOfCar){};
+
     @Pointcut("execution(public * com.example.driversandcars.controller.DriversAndCarsController.addDriversAndCars(..)) && args(driver, ..)")
     public void pointcutAdd(DriverDto driver){};
 

@@ -17,8 +17,6 @@ import java.util.UUID;
 public class CarEntity {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_seq")
-//    @SequenceGenerator(name = "car_seq", allocationSize = 1)
     @GeneratedValue(generator = "uuid_gen")
     @GenericGenerator(name = "uuid_gen", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID Id;

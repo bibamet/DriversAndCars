@@ -18,8 +18,6 @@ import java.util.UUID;
 public class DriverEntity {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "driver_gen")
-//    @SequenceGenerator(name = "driver_gen", allocationSize = 1, sequenceName = "driver_gen")
     @GeneratedValue(generator = "uuid_gen")
     @GenericGenerator(name = "uuid_gen", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
@@ -29,15 +27,15 @@ public class DriverEntity {
     private String category;
 
     @Column(unique = true)
-    private Long serial_license;
+    private Long serial_license; //rename to camelCase
 
     @Column(unique = true)
-    private Long number_license;
+    private Long number_license;  //rename to camelCase
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)//, mappedBy = "owner")
     @JoinColumn(name = "owner_id")
     private List<CarEntity> cars;
 
-    LocalDate license;
+    private LocalDate license;
 
 }

@@ -36,10 +36,10 @@ public class DriverDto {
     @Min(value = 100000, message = "Номер должен состоять из 6 цифр")
     @Max(value = 999999, message = "Номер должен состоять из 6 цифр")
     private Long number_license;
-    private LocalDate license;
+    private LocalDate license; //rename
 
     @Valid
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //todo remove
     private CarDto car;
 
 }
