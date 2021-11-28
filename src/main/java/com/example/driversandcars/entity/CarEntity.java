@@ -3,6 +3,7 @@ package com.example.driversandcars.entity;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.Persistent;
 
 import javax.persistence.*;
 import java.util.UUID;
