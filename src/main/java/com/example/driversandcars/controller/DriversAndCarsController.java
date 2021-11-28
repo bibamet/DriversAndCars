@@ -2,13 +2,16 @@ package com.example.driversandcars.controller;
 
 import com.example.driversandcars.dto.DriverDto;
 import com.example.driversandcars.service.DriversAndCarsService;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 //todo add checkstyle
@@ -22,24 +25,13 @@ public class DriversAndCarsController {
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @GetMapping("/car/{carNumber}")
-    public DriverDto getDriverByCarId(@PathVariable String carNumber) { //add validation
-        //remove wsp
+    public DriverDto getDriverByCarId(@PathVariable String carNumber) {
         return driversAndCarsService.getDriverByCarId(carNumber);
-
-        //delete comments
-//        return carEntity.map(entity -> new ResponseEntity<>(entity.getOwner(), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(new DriverEntity(), HttpStatus.NOT_FOUND));
-
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/add") // remove signature
     public void addDriversAndCars(@Valid @RequestBody DriverDto driverDTO) {
-        //remove wsp
         driversAndCarsService.addDriversAndCars(driverDTO);
-
-    }
-
-    public void testMethod() {
-        System.out.println("Привет"); //remove
     }
 }

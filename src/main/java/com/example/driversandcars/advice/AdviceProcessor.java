@@ -1,4 +1,5 @@
 package com.example.driversandcars.advice;
+
 import com.example.driversandcars.dto.DriverDto;
 import com.example.driversandcars.entity.log.LogEntity;
 import com.example.driversandcars.service.LogService;
@@ -11,7 +12,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
@@ -68,7 +68,7 @@ public class AdviceProcessor {
 
     }
 
-    @Around(value = "pointcutAdd(driver)")
+    @Around(value = "pointcutAdd(driver)") // todo Research transaction
     public Object aroundProcessAdd(ProceedingJoinPoint pjp, DriverDto driver) throws Throwable {
 
         Signature sign = pjp.getSignature();
@@ -120,20 +120,18 @@ public class AdviceProcessor {
             throw exception;
 
         }
-
         endTime = System.currentTimeMillis();
-
         logService.saveLog(LogEntity.builder()
                 .method(method)
                 .timeStamp(timestamp)
                 .executionTime(endTime - startTime)
                 .result(result.toString())
+//                .result(result != null ? String.valueOf(result) : null)
                 .exception(null)
                 .clientHost(clientHost)
                 .build());
 
         log.debug("after executing {}. Returned value {}", method, result);
-
         return result;
 
     }

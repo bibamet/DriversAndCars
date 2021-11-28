@@ -1,19 +1,17 @@
 package com.example.driversandcars.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -30,16 +28,15 @@ public class DriverDto {
     @Positive
     @Min(value = 1000, message = "Серия должна состоять из 4 цифр")
     @Max(value = 9999, message = "Серия должна состоять из 4 цифр")
-    private Long serial_license;
+    private Long serialLicense;
 
     @Positive
     @Min(value = 100000, message = "Номер должен состоять из 6 цифр")
     @Max(value = 999999, message = "Номер должен состоять из 6 цифр")
-    private Long number_license;
+    private Long numberLicense;
     private LocalDate license; //rename
 
     @Valid
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //todo remove
     private CarDto car;
 
 }

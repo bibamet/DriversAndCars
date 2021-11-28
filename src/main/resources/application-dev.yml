@@ -1,18 +1,13 @@
 spring:
   datasource:
-    url: "jdbc:postgresql://localhost:5432/postgres?currentSchema=driversandcarsliqui"
-    username: driversandcarsuserusage
-    password: 123
+    url: "jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:54320}/${DATABASE_NAME:postgres}?currentSchema=${DATABASE_SCHEMA:public}"
+    username: ${DATABASE_USERNAME:driversandcarsuserusage}
+    password: ${DATABASE_PASSWORD:123}
   liquibase:
-    user: driversandcarsuser
-    password: 123
+    user: ${LIQUIBASE_USERNAME:driversandcarsuser}
+    password: ${LIQUIBASE_PASSWORD:123}
     change-log: 'classpath:db-migrations/changelog.xml'
   jpa:
-#    hibernate:
-#      ddl-auto: update
     show-sql: true
 server:
   port: 42100
-internal:
-  api:
-    predicate-uuid: ${PREDICATE_UUID:"public.uuid_generate_v4()"}

@@ -1,9 +1,21 @@
 package com.example.driversandcars.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -27,10 +39,10 @@ public class DriverEntity {
     private String category;
 
     @Column(unique = true)
-    private Long serial_license; //rename to camelCase
+    private Long serialLicense;
 
     @Column(unique = true)
-    private Long number_license;  //rename to camelCase
+    private Long numberLicense;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)//, mappedBy = "owner")
     @JoinColumn(name = "owner_id")

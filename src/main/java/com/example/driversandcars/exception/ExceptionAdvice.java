@@ -37,14 +37,13 @@ public class ExceptionAdvice {
 
         if (exception.getBindingResult().hasErrors()) {
             List<ObjectError> errors = exception.getBindingResult().getAllErrors();
-
             String allErrors = errors.stream().map(error -> (FieldError) error)
                     .map(error -> error.getDefaultMessage() + ": <" + error.getField() + ">")
                     .collect(Collectors.joining("; "));
-
             return wrapValidException(allErrors, HttpStatus.BAD_REQUEST);
-
-        } else return wrapValidException("Validation error", HttpStatus.BAD_REQUEST);
+        } else {
+            return wrapValidException("Validation error", HttpStatus.BAD_REQUEST);
+        }
 
     }
 
