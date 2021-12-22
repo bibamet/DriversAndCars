@@ -44,7 +44,7 @@ public class DriverEntity {
     @Column(unique = true)
     private Long numberLicense;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)//, mappedBy = "owner")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)//, mappedBy = "owner")
     @JoinColumn(name = "owner_id")
     private List<CarEntity> cars;
 
