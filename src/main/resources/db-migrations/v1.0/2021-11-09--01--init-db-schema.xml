@@ -40,7 +40,7 @@
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="owner_id" type="uuid">
-                <constraints foreignKeyName="fk_driver_id" nullable="false" references="drivers(id)"/>
+                <constraints foreignKeyName="fk_driver_id" nullable="true" references="drivers(id)"/>
             </column>
         </createTable>
     </changeSet>

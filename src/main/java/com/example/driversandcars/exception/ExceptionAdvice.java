@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +21,7 @@ public class ExceptionAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    @ExceptionHandler({ConstraintViolationException.class, DataIntegrityViolationException.class})
+    @ExceptionHandler({DataIntegrityViolationException.class})
     public ApiError handleConstraintException(DataIntegrityViolationException exception) {
 
         if (Objects.nonNull(exception.getRootCause())) {
@@ -32,20 +33,33 @@ public class ExceptionAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
+    @ExceptionHandler({ConstraintViolationException.class})
+    public ApiError handleConstraintException(ConstraintViolationException exception) {
+        return wrapBusinessException(exception, HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ApiError handleConstraintException(MethodArgumentNotValidException exception) {
 
         if (exception.getBindingResult().hasErrors()) {
             List<ObjectError> errors = exception.getBindingResult().getAllErrors();
-
             String allErrors = errors.stream().map(error -> (FieldError) error)
                     .map(error -> error.getDefaultMessage() + ": <" + error.getField() + ">")
                     .collect(Collectors.joining("; "));
-
             return wrapValidException(allErrors, HttpStatus.BAD_REQUEST);
+        } else {
+            return wrapValidException("Validation error", HttpStatus.BAD_REQUEST);
+        }
 
-        } else return wrapValidException("Validation error", HttpStatus.BAD_REQUEST);
+    }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    @ExceptionHandler({EntityNotFoundException.class})
+    public ApiError handleNotFoundException(EntityNotFoundException exception) {
+        return wrapBusinessException(exception, HttpStatus.NOT_FOUND);
     }
 
     private ApiError wrapBusinessException(Throwable throwable, HttpStatus status) {

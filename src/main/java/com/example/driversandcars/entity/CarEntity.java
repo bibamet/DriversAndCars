@@ -1,10 +1,21 @@
 package com.example.driversandcars.entity;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.UUID;
 
 @Entity(name = "cars")
@@ -17,18 +28,16 @@ import java.util.UUID;
 public class CarEntity {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_seq")
-//    @SequenceGenerator(name = "car_seq", allocationSize = 1)
     @GeneratedValue(generator = "uuid_gen")
     @GenericGenerator(name = "uuid_gen", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID Id;
+    private UUID id;
 
     private String model;
     @Column(unique = true)
     private String numberOfCar;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
-    DriverEntity owner;
+    private DriverEntity owner;
 
 }

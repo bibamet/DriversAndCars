@@ -1,9 +1,21 @@
 package com.example.driversandcars.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -18,8 +30,6 @@ import java.util.UUID;
 public class DriverEntity {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "driver_gen")
-//    @SequenceGenerator(name = "driver_gen", allocationSize = 1, sequenceName = "driver_gen")
     @GeneratedValue(generator = "uuid_gen")
     @GenericGenerator(name = "uuid_gen", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
@@ -29,15 +39,15 @@ public class DriverEntity {
     private String category;
 
     @Column(unique = true)
-    private Long serial_license;
+    private Long serialLicense;
 
     @Column(unique = true)
-    private Long number_license;
+    private Long numberLicense;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)//, mappedBy = "owner")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)//, mappedBy = "owner")
     @JoinColumn(name = "owner_id")
     private List<CarEntity> cars;
 
-    LocalDate license;
+    private LocalDate license;
 
 }

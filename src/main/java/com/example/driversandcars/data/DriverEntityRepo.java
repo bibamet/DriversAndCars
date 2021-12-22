@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface DriverEntityRepo extends JpaRepository<DriverEntity, Long> {
-//    Optional<DriverEntity> findBySerial_licenseAndNumber_license(Long serial_license, Long number_license);
+    Optional<DriverEntity> findBySerialLicenseAndNumberLicense(Long serialLicense, Long numberLicense);
 }
