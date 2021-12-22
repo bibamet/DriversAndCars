@@ -22,7 +22,7 @@ public class AssignController {
 
     private final AssignService assignService;
 
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PatchMapping
     public void assignEntities(@Valid @RequestBody AssignDto assignDto) {
         assignService.assignEntities(assignDto);
