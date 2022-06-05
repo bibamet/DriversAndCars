@@ -1,7 +1,9 @@
 package com.example.driversandcars.advice;
 
 import com.example.driversandcars.dto.DriverDto;
+import com.example.driversandcars.dto.KafkaMessageDto;
 import com.example.driversandcars.entity.log.LogEntity;
+import com.example.driversandcars.kafka.producer.Producer;
 import com.example.driversandcars.service.LogService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,15 +20,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 
-@Aspect
-@Component
+//@Aspect
+//@Component
 @Slf4j
 @RequiredArgsConstructor
 //todo RENAME to logical name
 public class AdviceProcessor {
 
     private final LogService logService;
-
+    private final Producer producer;
     private final HttpServletRequest httpServletRequest;
 
     @Pointcut("execution(public * com.example.driversandcars.controller.DriversController.getDriverByCarId(..)) && args(numberOfCar, ..)")
@@ -53,12 +55,19 @@ public class AdviceProcessor {
             result = pjp.proceed();
         } catch (EntityNotFoundException exception) {
             Long endTime = System.currentTimeMillis();
-            logService.saveLog(LogEntity.builder()
+//            logService.saveLog(LogEntity.builder()
+//                    .method(method)
+//                    .timeStamp(timestamp)
+//                    .executionTime(endTime - startTime)
+//                    .result(result == null ? null : result.toString())
+//                    .exception(exception.toString())
+//                    .clientHost(clientHost)
+//                    .build());
+            producer.sendMessage(KafkaMessageDto.builder()
                     .method(method)
-                    .timeStamp(timestamp)
                     .executionTime(endTime - startTime)
                     .result(result == null ? null : result.toString())
-                    .exception(exception.toString())
+                    .exception(exception.getMessage())
                     .clientHost(clientHost)
                     .build());
             log.debug("after executing {}. Returned value {}", method, result);
@@ -66,13 +75,20 @@ public class AdviceProcessor {
         }
 
         Long endTime = System.currentTimeMillis();
-        logService.saveLog(LogEntity.builder()
-                        .method(method)
-                        .timeStamp(timestamp)
-                        .executionTime(endTime - startTime)
-                        .result(result.toString())
-                        .exception(null)
-                        .clientHost(clientHost)
+//        logService.saveLog(LogEntity.builder()
+//                        .method(method)
+//                        .timeStamp(timestamp)
+//                        .executionTime(endTime - startTime)
+//                        .result(result.toString())
+//                        .exception(null)
+//                        .clientHost(clientHost)
+//                .build());
+        producer.sendMessage(KafkaMessageDto.builder()
+                .method(method)
+                .executionTime(endTime - startTime)
+                .result(result == null ? null : result.toString())
+                .exception(null)
+                .clientHost(clientHost)
                 .build());
         log.debug("after executing {}. Returned value {}", method, result);
         return result;
@@ -101,13 +117,21 @@ public class AdviceProcessor {
 
             endTime = System.currentTimeMillis();
 
-            logService.saveLog(LogEntity.builder()
+//            logService.saveLog(LogEntity.builder()
+//                    .method(method)
+//                    .timeStamp(timestamp)
+//                    .executionTime(endTime - startTime)
+//                    .result("false")
+//                    .exception(exception.getMessage())
+//                    .clientHost(httpServletRequest.getRemoteAddr())
+//                    .build());
+
+            producer.sendMessage(KafkaMessageDto.builder()
                     .method(method)
-                    .timeStamp(timestamp)
                     .executionTime(endTime - startTime)
-                    .result("false")
+                    .result(result == null ? null : result.toString())
                     .exception(exception.getMessage())
-                    .clientHost(httpServletRequest.getRemoteAddr())
+                    .clientHost(clientHost)
                     .build());
 
             log.debug("after executing {}. Exception: {}", method, exception);
@@ -117,13 +141,21 @@ public class AdviceProcessor {
 
             endTime = System.currentTimeMillis();
 
-            logService.saveLog(LogEntity.builder()
+//            logService.saveLog(LogEntity.builder()
+//                    .method(method)
+//                    .timeStamp(timestamp)
+//                    .executionTime(endTime - startTime)
+//                    .result("false")
+//                    .exception(exception.getRootCause().getMessage())
+//                    .clientHost(httpServletRequest.getRemoteAddr())
+//                    .build());
+
+            producer.sendMessage(KafkaMessageDto.builder()
                     .method(method)
-                    .timeStamp(timestamp)
                     .executionTime(endTime - startTime)
-                    .result("false")
+                    .result(result == null ? null : result.toString())
                     .exception(exception.getRootCause().getMessage())
-                    .clientHost(httpServletRequest.getRemoteAddr())
+                    .clientHost(clientHost)
                     .build());
 
             log.debug("after executing {}. Exception: {}", method, exception);
@@ -131,12 +163,20 @@ public class AdviceProcessor {
 
         }
         endTime = System.currentTimeMillis();
-        logService.saveLog(LogEntity.builder()
+//        logService.saveLog(LogEntity.builder()
+//                .method(method)
+//                .timeStamp(timestamp)
+//                .executionTime(endTime - startTime)
+//                .result(result.toString())
+////                .result(result != null ? String.valueOf(result) : null)
+//                .exception(null)
+//                .clientHost(clientHost)
+//                .build());
+
+        producer.sendMessage(KafkaMessageDto.builder()
                 .method(method)
-                .timeStamp(timestamp)
                 .executionTime(endTime - startTime)
-                .result(result.toString())
-//                .result(result != null ? String.valueOf(result) : null)
+                .result(result != null ? String.valueOf(result) : null)
                 .exception(null)
                 .clientHost(clientHost)
                 .build());

@@ -11,3 +11,7 @@ spring:
     show-sql: true
 server:
   port: 42100
+kafka:
+  bootstrap-servers: localhost:9092
+  consumer:
+    group-id: test-consumer-group
